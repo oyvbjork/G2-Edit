@@ -714,15 +714,24 @@ tRectangle render_paramType1NoteDial(tModule * module, tRectangle rectangle, cha
     
     
 tRectangle render_paramType1Resonance(tModule * module, tRectangle rectangle, char* label, char* buff, double paramValue, uint32_t range, uint32_t morphRange, tRgb colour, uint32_t paramRef) {
-    double res    = 0.0;
-    double maxVal = 100.0;
-    
-    if (paramValue < 127) {
-        res = round(((double)paramValue * maxVal * 10.0) / 128.0) / 10.0;
+    // 0.50 to 50
+    int paramV = (int)paramValue;
+    const double resVals[] = {
+        0.50, 0.51, 0.51, 0.52,  0.53, 0.54, 0.55, 0.55,  0.56, 0.57, 0.58, 0.59,  0.60, 0.61, 0.62, 0.63,
+        0.64, 0.65, 0.66, 0.67,  0.68, 0.69, 0.70, 0.71,  0.73, 0.74, 0.75, 0.76,  0.78, 0.79, 0.81, 0.82,
+        0.84, 0.85, 0.87, 0.88,  0.90, 0.92, 0.94, 0.95,  0.97, 0.99, 1.01, 1.03,  1.06, 1.08, 1.10, 1.12,
+        1.15, 1.17, 1.20, 1.23,  1.25, 1.28, 1.31, 1.34,  1.37, 1.41, 1.44, 1.48,  1.51, 1.55, 1.59, 1.63,
+        1.67, 1.72, 1.76, 1.81,  1.86, 1.91, 1.97, 2.03,  2.08, 2.15, 2.21, 2.28,  2.35, 2.42, 2.50, 2.58,
+        2.67, 2.76, 2.85, 2.95,  3.05, 3.16, 3.28, 3.40,  3.53, 3.67, 3.81, 3.96,  4.13, 4.30, 4.49, 4.68,
+        4.89, 5.12, 5.36, 5.61,  5.89, 6.19, 6.51, 6.85,  7.23, 7.64, 8.08, 8.56,  9.08, 9.66, 10.0, 11.0,
+        12.0, 13.0, 14.0, 15.0,  16.0, 17.0, 19.0, 20.0,  22.0, 25.0, 27.0, 30.0,  34.0, 38.0, 44.0, 50.0
+    };
+    double res = resVals[paramV];
+    if (paramValue < 110) {
+        snprintf(buff, sizeof(buff), "%.2f", res);
     } else {
-        res = maxVal;             // Clip
+        snprintf(buff, sizeof(buff), "%.0f", res);
     }
-    snprintf(buff, sizeof(buff), "%.1f", res);
     return render_dial_with_text(moduleArea, rectangle, label, buff, paramValue, paramLocationList[paramRef].range, morphRange, colour);
 }
 
