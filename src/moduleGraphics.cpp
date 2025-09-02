@@ -332,11 +332,16 @@ void render_param_common(tRectangle rectangle, tModule * module, uint32_t paramR
                     render_param_function = &render_paramType1NoteDial;
                     break;
                 }
-                case paramType1CommonDial: // Ultimately might not be a common dial, or could just be a default percent dial!?
-                case paramType1LRDial:     // Pan type dial, perhaps with reset triangle
                 case paramType1Resonance:
                 {
                     render_param_function = &render_paramType1Resonance;
+                    break;
+                }
+                case paramType1CommonDial: // Ultimately might not be a common dial, or could just be a default percent dial!?
+                case paramType1LRDial:     // Pan type dial, perhaps with reset triangle
+                default:
+                {
+                    render_param_function = &render_paramType1CommonDial;
                     break;
                 }
             }
@@ -375,7 +380,9 @@ void render_param_common(tRectangle rectangle, tModule * module, uint32_t paramR
                     LOG_ERROR("Reached wrong switch in case paramType2Toggle or paramType2UpDown");
                 }
             }
-            module->param[gVariation][paramIndex].rectangle = render_param_function(module, rectangle, label, buff, paramValue, paramLocationList[paramRef].range, morphRange, RGB_GREY_5, paramIndex, paramRef, paramLocationList[paramRef].strMap);
+            if (render_param_function != NULL) {
+                module->param[gVariation][paramIndex].rectangle = render_param_function(module, rectangle, label, buff, paramValue, paramLocationList[paramRef].range, morphRange, RGB_GREY_5, paramIndex, paramRef, paramLocationList[paramRef].strMap);
+            }
             break;
         }
         default: {

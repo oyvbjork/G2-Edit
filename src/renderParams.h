@@ -45,6 +45,7 @@ tRectangle render_paramType1LevAmpDial(tModule * module, tRectangle rectangle, c
 tRectangle render_paramType1Pan(tModule * module, tRectangle rectangle, char* label, char* buff, double paramValue, uint32_t range, uint32_t morphRange, tRgb colour, uint32_t paramRef);
 tRectangle render_paramType1NoteDial(tModule * module, tRectangle rectangle, char* label, char* buff, double paramValue, uint32_t range, uint32_t morphRange, tRgb colour, uint32_t paramRef);
 tRectangle render_paramType1Resonance(tModule * module, tRectangle rectangle, char* label, char* buff, double paramValue, uint32_t range, uint32_t morphRange, tRgb colour, uint32_t paramRef);
+tRectangle render_paramType1CommonDial(tModule * module, tRectangle rectangle, char* label, char* buff, double paramValue, uint32_t range, uint32_t morphRange, tRgb colour, uint32_t paramRef);
 
 tRectangle render_paramType1StandardToggle(tModule * module, tRectangle rectangle, char* label, char* buff, double paramValue, uint32_t range, uint32_t morphrange, tRgb colour, uint32_t paramIndex, uint32_t paramRef, const char ** strMap);
 tRectangle render_paramType1UpDown(tModule * module, tRectangle rectangle, char* label, char* buff, double paramValue, uint32_t range, uint32_t morphrange, tRgb colour, uint32_t paramIndex, uint32_t paramRef, const char ** strMap);

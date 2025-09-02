@@ -205,6 +205,11 @@ tRectangle render_paramType1FreqDrum(tModule * module, tRectangle rectangle, cha
 tRectangle render_paramType1LFORate(tModule * module, tRectangle rectangle, char* label, char* buff, double paramValue, uint32_t range, uint32_t morphRange, tRgb colour, uint32_t paramRef) {
     double rate;
     int    rateModeParamIndex;
+    const char * clkSyncStrMap[] = {"64/1", "48/1",  "32/1",  "24/1", "16/1",  "12/1",  "8/1",  "6/1",  "4/1",  "3/1", "2/1",   "1/1D",
+        "1/1",  "1/2D",  "1/1T",  "1/2",  "1/4D",  "1/2T",  "1/4",  "1/8D", "1/4T", "1/8", "1/16D", "1/8T",
+        "1/16", "1/32D", "1/16T", "1/32", "1/64D", "1/32T", "1/64", "1/64T"};
+    int          posClkSyncStrMap = floor(paramValue / 4);
+
     
     switch (module->type) {
         case moduleTypeLfoShpA:
@@ -289,10 +294,6 @@ tRectangle render_paramType1LFORate(tModule * module, tRectangle rectangle, char
             snprintf(buff, sizeof(buff), "%u", bpm);
             break;
         case 4: // ClkSync. 32 values
-            const char * clkSyncStrMap[] = {"64/1", "48/1",  "32/1",  "24/1", "16/1",  "12/1",  "8/1",  "6/1",  "4/1",  "3/1", "2/1",   "1/1D",
-                "1/1",  "1/2D",  "1/1T",  "1/2",  "1/4D",  "1/2T",  "1/4",  "1/8D", "1/4T", "1/8", "1/16D", "1/8T",
-                "1/16", "1/32D", "1/16T", "1/32", "1/64D", "1/32T", "1/64", "1/64T"};
-            int          posClkSyncStrMap = floor(paramValue / 4);
             snprintf(buff, sizeof(buff), "%s\n", clkSyncStrMap[posClkSyncStrMap]);
             break;
         }
@@ -340,7 +341,6 @@ tRectangle render_paramType1dB(tModule * module, tRectangle rectangle, char* lab
 }
     
 tRectangle render_paramType1MixLevel(tModule * module, tRectangle rectangle, char* label, char* buff, double paramValue, uint32_t range, uint32_t morphRange, tRgb colour, uint32_t paramRef) {
-    double       level      = 0.0;
     const double dbLvlMap[] = {-100.0, -99.9, -99.0, -72.1, -69.2, -66.9, -64.8, -62.9,
         -61.1,    -59,  -57.9, -56.4, -55.0, -53.6, -52.3,-51.0,
         -49.8,  -48.6, -47.5, -46.4, -45.3, -44.3, -43.3, -42.3,
@@ -660,6 +660,7 @@ tRectangle render_paramType1BipLevel(tModule * module, tRectangle rectangle, cha
         } else {
             res = maxVal;             // Clip
         }
+        snprintf(buff, sizeof(buff), "%.0f", res);
     } else {
         switch (module->param[gVariation][typeParamIndex].value) {
             case 0: // Bip
@@ -746,6 +747,30 @@ tRectangle render_paramType1Resonance(tModule * module, tRectangle rectangle, ch
     return render_dial_with_text(moduleArea, rectangle, label, buff, paramValue, paramLocationList[paramRef].range, morphRange, colour);
 }
 
+tRectangle render_paramType1CommonDial(tModule * module, tRectangle rectangle, char* label, char* buff, double paramValue, uint32_t range, uint32_t morphRange, tRgb colour, uint32_t paramRef) {
+    double res    = 0.0;
+    double maxVal = 100.0;
+    switch (module->type) {
+        case moduleTypeEnvMulti:
+        {
+            maxVal = 64.0;
+            break;
+        }
+        default:
+        {
+            maxVal = 100;
+            break;
+        }
+    }
+    if (paramValue < 127) {
+        res = round(((double)paramValue * maxVal * 10.0) / 128.0) / 10.0;
+    } else {
+        res = maxVal;             // Clip
+    }
+    snprintf(buff, sizeof(buff), "%.1f", res);
+    return render_dial_with_text(moduleArea, rectangle, label, buff, paramValue, paramLocationList[paramRef].range, morphRange, colour);
+}
+    
 tRectangle render_paramType1StandardToggle(tModule * module, tRectangle rectangle, char* label, char* buff, double paramValue, uint32_t range, uint32_t morphrange, tRgb colour, uint32_t paramIndex, uint32_t paramRef, const char ** strMap) {
     double  y          = rectangle.coord.y;
     double  textHeight = rectangle.size.h / 2.0;
