@@ -633,7 +633,7 @@ tRectangle render_paramType1Pitch(tModule * module, tRectangle rectangle, char* 
 }
     
 tRectangle render_paramType1BipLevel(tModule * module, tRectangle rectangle, char* label, char* buff, double paramValue, uint32_t range, uint32_t morphRange, tRgb colour, uint32_t paramRef) {
-    // -64 to 63
+    // -64 to 64, skipping 63
     double res    = 0.0;
     double maxVal = 64.0;
     int typeParamIndex;
@@ -642,6 +642,11 @@ tRectangle render_paramType1BipLevel(tModule * module, tRectangle rectangle, cha
         case moduleTypeConstant:
         {
             typeParamIndex = 1;
+            break;
+        }
+        case moduleTypeConstSwT:
+        {
+            typeParamIndex = 2;
             break;
         }
         default:
@@ -664,6 +669,7 @@ tRectangle render_paramType1BipLevel(tModule * module, tRectangle rectangle, cha
                 } else {
                     res = maxVal;             // Clip
                 }
+                snprintf(buff, sizeof(buff), "%.0f", res);
                 break;
             }
             case 1:
@@ -673,10 +679,15 @@ tRectangle render_paramType1BipLevel(tModule * module, tRectangle rectangle, cha
                 } else {
                     res = maxVal;
                 }
+                snprintf(buff, sizeof(buff), "%.1f", res);
+                break;
+            }
+            default:
+            {
+                snprintf(buff, sizeof(buff), "WRONG VALUE");
             }
         }
     }
-    snprintf(buff, sizeof(buff), "%.1f", res);
     return render_dial_with_text(moduleArea, rectangle, (char *)paramLocationList[paramRef].label, buff, paramValue, paramLocationList[paramRef].range, morphRange, colour);
 }
     

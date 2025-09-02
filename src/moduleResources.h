@@ -626,7 +626,7 @@ const tParamLocation paramLocationList[] = {
     {moduleTypeFltMulti,   paramType1StandardToggle, paramType2Toggle, {{ 70, -10}, { 7,  7}}, anchorBottomLeft,  NULL,             2,   0, fltMultiDbStrMap,       NULL          }, // 49 dB
     {moduleTypeFltMulti,   paramType1Bypass,         paramType2Toggle, {{-17,  -3}, { 5,  5}}, anchorBottomRight, NULL,             2,   1, NULL,                   NULL          }, // 49 Bypass
     // 50 ConstSwT
-    {moduleTypeConstSwT,   paramType1CommonDial,     paramType2Dial,   {{ 80,  -3}, { 7, 14}}, anchorBottomLeft,  NULL,           128,  64, NULL,                   NULL          }, // 50 Value
+    {moduleTypeConstSwT,   paramType1BipLevel,       paramType2Dial,   {{ 80,  -3}, { 7, 14}}, anchorBottomLeft,  NULL,           128,  64, NULL,                   NULL          }, // 50 Value
     {moduleTypeConstSwT,   paramType1StandardToggle, paramType2Toggle, {{ 60,  -3}, { 7,  7}}, anchorBottomLeft,  NULL,             2,   0, offOnStrMap,            offOnColourMap}, // 50 Switch
     {moduleTypeConstSwT,   paramType1StandardToggle, paramType2Toggle, {{ 40,  -3}, { 7,  7}}, anchorBottomLeft,  NULL,             2,   0, bipUniStrMap,           NULL          }, // 50 Bip/Uni
     // 51 FltNord
