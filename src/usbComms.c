@@ -272,9 +272,9 @@ static void parse_param_list(uint32_t slot, uint8_t * buff, uint32_t * subOffset
         for (j = 0; j < variationCount; j++) {                                                          // 0 to 9, but last 2 not available on old editor. Possibly/probably init values?
             uint32_t variation = read_bit_stream(buff, subOffset, 8);
 
-            if (variation == 0) { // Limit to just 1st variation for now
+            //if (variation == 0) { // Limit to just 1st variation for now
                 LOG_DEBUG("  Variation %u\n", variation);
-            }
+            //}
 
             if (j != variation) {
                 LOG_WARNING("loop var %u != variation %u\n", j, variation);
@@ -283,9 +283,9 @@ static void parse_param_list(uint32_t slot, uint8_t * buff, uint32_t * subOffset
             for (k = 0; k < paramCount; k++) {
                 paramValue = read_bit_stream(buff, subOffset, 7);
 
-                if (variation == 0) { // Limit to just 1st variation for now
+                //if (variation == 0) { // Limit to just 1st variation for now
                     LOG_DEBUG("   Param number %02d param value %02d\n", k, paramValue);
-                }
+                //}
                 module.param[j][k].value = paramValue;
             }
         }
@@ -714,7 +714,7 @@ static void parse_param_change(uint8_t * buff, int length) {
     module.param[variation][param].value = value;
     write_module(key, &module);
 
-    LOG_DEBUG("Param change - module %u:%u param = %u value = %u\n", key.location, key.index, param, value);
+    LOG_DEBUG("Param change - module %u:%u variation = %u  param = %u value = %u\n", key.location, key.index, variation, param, value);
 }
 
 static int parse_command_response(uint8_t * buff, uint32_t * bitPos, uint8_t commandResponse, uint8_t subCommand, int length) {
