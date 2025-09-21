@@ -229,7 +229,7 @@ tRectangle render_paramType1LFORate(tModule * module, tRectangle rectangle, char
         }
         default:
         {
-            rateModeParamIndex = -1;
+            rateModeParamIndex = 0;
             LOG_ERROR("paramType1LFORate missing module->type implementation");
         }
     }
@@ -387,7 +387,8 @@ tRectangle render_paramType1MixLevel(tModule * module, tRectangle rectangle, cha
     
 tRectangle render_paramType1Time(tModule * module, tRectangle rectangle, char* label, char* buff, double paramValue, uint32_t range, uint32_t morphRange, tRgb colour, uint32_t paramRef) {
     double time = 0.0;
-    double min_time, max_time;
+    double min_time = 0;
+    double max_time = 0.0;;
     
     switch (module->type) {
         case moduleTypeGlide:
