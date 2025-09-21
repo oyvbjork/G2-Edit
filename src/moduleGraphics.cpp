@@ -229,7 +229,7 @@ void render_param_common(tRectangle rectangle, tModule * module, uint32_t paramR
 
     module->param[gVariation][paramIndex].paramRef = paramRef;
 
-    LOG_DEBUG("param %u\n", paramValue);
+    //LOG_DEBUG("param %u\n", paramValue);
 
         
     switch(paramLocationList[paramRef].type2) { // TODO: These function parameters can go straight into the auto-initialised structures in moduleResources.h
@@ -371,6 +371,7 @@ void render_param_common(tRectangle rectangle, tModule * module, uint32_t paramR
                     break;
                 }
                 default: {
+                    render_param_function = NULL;
                     LOG_ERROR("Reached wrong switch in case paramType2Toggle or paramType2UpDown");
                 }
             }

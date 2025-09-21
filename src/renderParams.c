@@ -365,8 +365,13 @@ tRectangle render_paramType1MixLevel(tModule * module, tRectangle rectangle, cha
             expLinDBparam = 8;
             break;
         }
+        default:
+        {
+            expLinDBparam = 0;
+            LOG_ERROR("paramType1MixLevel missing module->type implementation");
+        }
     }
-    level = paramValue;
+    //level = paramValue;
     
     if (module->param[gVariation][expLinDBparam].value == 2) { // display dB
         if (paramValue == 0.0) {
@@ -436,12 +441,17 @@ tRectangle render_paramType1Time(tModule * module, tRectangle rectangle, char* l
                     max_time = 2.7;
                     break;
                 }
+                default: {
+                    max_time = 0.0;
+                    LOG_ERROR("paramType1Time module->mode[0].value has wrong value, should be 0--6");
+                }
             }
             break;
         }
         default:
         {
             max_time = 0.0;
+            min_time = 0.0;
             LOG_ERROR("paramType1Time missing module->type implementation");
         }
     }
@@ -647,7 +657,7 @@ tRectangle render_paramType1BipLevel(tModule * module, tRectangle rectangle, cha
             res = maxVal;             // Clip
         }
     } else {
-        switch (module->param[gVariation][typeParamIndex].value) {
+        switch (module->param[gVariation][typeParamIndex].value) {
             case 0: // Bip
             {
                 if (paramValue < 127) {
