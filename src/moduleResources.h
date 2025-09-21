@@ -71,7 +71,7 @@ const char * bipUniStrMap[]           = {"Bip", "Uni", NULL};
 const char * vowelStrMap[]            = {"A", "E", "I", "O", "U", "Y", "AA", "AE", "OE", NULL};
 const char * nordFilterTypeStrMap[]   = {"LP", "BP", "HP", "BR", NULL};
 const char * staticFilterTypeStrMap[] = {"LP", "BP", "HP", NULL};
-const char * multiEnvSustainStrMap[]  = {"None", "L1", "L2", "L3", "L4", NULL};
+const char * multiEnvSustainStrMap[]  = {"L1", "L2", "L3", "Trg", NULL};
 const char * drSynthPresetStrMap[]    = {"Kick 1", "Kick 2", "Kick 3", "Kick 4", "Kick 5", "Snare 1", "Snare 2", "Snare 3", "Snare 4", "Snare 5", "Tom1 1", "Tom1 2", "Tom1 3", "Tom2 1", "Tom2 2", "Tom2 3", "Tom3 1", "Tom3 2", "Tom3 3", "Cymb 1", "Cymb 2", "Cymb 3", "Cymb 4", "Cymb 5", "Perc 1", "Perc 2", "Perc 3", "Perc 4", "Perc 5", "Perc 6", NULL}; // *** Don't have the list
 const char * asymSymStrMap[]          = {"Asym", "Sym", NULL};
 const char * odTypeStrMap[]           = {"Soft", "Hard", "Heavy", "Fat", NULL};
@@ -650,7 +650,7 @@ const tParamLocation paramLocationList[] = {
     {moduleTypeEnvMulti,   paramType1ADRTime,        paramType2Dial,   {{ 50,  -3}, { 7, 14}}, anchorBottomLeft,  "T3",           128,   0, NULL,                   NULL          }, // 52 Time3
     {moduleTypeEnvMulti,   paramType1ADRTime,        paramType2Dial,   {{ 70,  -3}, { 7, 14}}, anchorBottomLeft,  "T4",           128,   0, NULL,                   NULL          }, // 52 Time4
     {moduleTypeEnvMulti,   paramType1StandardToggle, paramType2Toggle, {{  3, -22}, { 7,  7}}, anchorBottomLeft,  NULL,             2,   0, normalResetStrMap,      NULL          }, // 52 Reset
-    {moduleTypeEnvMulti,   paramType1StandardToggle, paramType2Toggle, {{ 30, -22}, { 7,  7}}, anchorBottomLeft,  "Sust",           5,   1, multiEnvSustainStrMap,  NULL          }, // 52 SustainPlacement
+    {moduleTypeEnvMulti,   paramType1StandardToggle, paramType2Toggle, {{ 30, -22}, { 7,  7}}, anchorBottomLeft,  "Sust",           4,   1, multiEnvSustainStrMap,  NULL          }, // 52 SustainPlacement
     {moduleTypeEnvMulti,   paramType1StandardToggle, paramType2Toggle, {{-17, -29}, { 7,  7}}, anchorBottomRight, NULL,             6,   0, posStrMap,              NULL          }, // 52 OutType
     {moduleTypeEnvMulti,   paramType1StandardToggle, paramType2Toggle, {{ 10,  17}, { 7,  7}}, anchorTopLeft,     NULL,             2,   0, kbStrMap,               offOnColourMap}, // 52 Kbt
     {moduleTypeEnvMulti,   paramType1StandardToggle, paramType2Toggle, {{-26, -17}, { 7,  7}}, anchorBottomRight, NULL,             4,   0, envShapeStrMap,         NULL          }, // 52 Shape
@@ -1692,8 +1692,8 @@ const tConnectorLocation connectorLocationList[] = {
     {moduleTypeEnvMulti,    connectorDirIn,  connectorTypeLogic,   {{  3,  10}, {CONNECTOR_SIZE, CONNECTOR_SIZE}}, anchorTopLeft,     "Gate",         labelLocRight}, // 52 Gate
     {moduleTypeEnvMulti,    connectorDirIn,  connectorTypeControl, {{ 17,  10}, {CONNECTOR_SIZE, CONNECTOR_SIZE}}, anchorTopLeft,     "AM",           labelLocRight}, // 52 AM
     {moduleTypeEnvMulti,    connectorDirIn,  connectorTypeControl, {{-10,   7}, {CONNECTOR_SIZE, CONNECTOR_SIZE}}, anchorTopRight,    NULL,           labelLocRight}, // 52 In
-    {moduleTypeEnvMulti,    connectorDirOut, connectorTypeControl, {{ -3,  14}, {CONNECTOR_SIZE, CONNECTOR_SIZE}}, anchorTopRight,    "Env",          labelLocLeft }, // 52 Env
     {moduleTypeEnvMulti,    connectorDirOut, connectorTypeControl, {{ -3,   7}, {CONNECTOR_SIZE, CONNECTOR_SIZE}}, anchorTopRight,    NULL,           labelLocUp   }, // 52 Out
+    {moduleTypeEnvMulti,    connectorDirOut, connectorTypeControl, {{ -3,  14}, {CONNECTOR_SIZE, CONNECTOR_SIZE}}, anchorTopRight,    "Env",          labelLocLeft }, // 52 Env
     // 53 SandH
     {moduleTypeSandH,       connectorDirIn,  connectorTypeControl, {{ 80,  -3}, {CONNECTOR_SIZE, CONNECTOR_SIZE}}, anchorBottomLeft,  NULL,           labelLocRight}, // 53 In
     {moduleTypeSandH,       connectorDirIn,  connectorTypeLogic,   {{ 60,  -3}, {CONNECTOR_SIZE, CONNECTOR_SIZE}}, anchorBottomLeft,  "Ctrl",         labelLocLeft }, // 53 Ctrl
