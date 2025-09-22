@@ -38,6 +38,10 @@
 56 Resonator - Alg values OK, but not checked for audio
 57 Automate - Skipped
 58 DrumSynth OK
+59 CompLev OK
+60 Mux8-1X OK
+61 Clip OK
+
 94 StChorus OK
 96 OscD OK
 97 OscA Works. Needs new UI element for the Freq control (param 0) which takes into account the value of param 6 Pitch Type.
