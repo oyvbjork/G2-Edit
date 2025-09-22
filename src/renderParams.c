@@ -45,7 +45,7 @@ extern "C" {
 
 tRectangle render_paramType1Freq(tModule * module, tRectangle rectangle, char* label, char* buff, double paramValue, uint32_t range, uint32_t morphRange, tRgb colour, uint32_t paramRef) {
     double freq = 0.0;
-    
+        
     freq = round(13.75 * pow(2, (double)paramValue / 12.0) * 100.0) / 100.0;
     
     if (freq < 100) {
@@ -60,11 +60,30 @@ tRectangle render_paramType1Freq(tModule * module, tRectangle rectangle, char* l
     return render_dial_with_text(moduleArea, rectangle, label, buff, paramValue, paramLocationList[paramRef].range, morphRange, colour);
 }
 
+tRectangle render_paramType1DrumSynthNoiseFreq(tModule * module, tRectangle rectangle, char* label, char* buff, double paramValue, uint32_t range, uint32_t morphRange, tRgb colour, uint32_t paramRef) {
+    double freq = 0.0;
+        
+    freq = round(10.30 * pow(2, (double)paramValue / 12.0) * 100.0) / 100.0;
+    
+    if (freq < 100) {
+        snprintf(buff, sizeof(buff), "%.2fHz", freq);
+    } else if (freq < 1000) {
+        snprintf(buff, sizeof(buff), "%.1fHz", freq);
+    } else if (freq < 10000) {
+        snprintf(buff, sizeof(buff), "%.2fkHz", freq / 1000.0);
+    } else {
+        snprintf(buff, sizeof(buff), "%.1fkHz", freq / 1000.0);
+    }
+    return render_dial_with_text(moduleArea, rectangle, label, buff, paramValue, paramLocationList[paramRef].range, morphRange, colour);
+}
+
+    
 tRectangle render_paramType1OscFreq(tModule * module, tRectangle rectangle, char* label, char* buff, double paramValue, uint32_t range, uint32_t morphRange, tRgb colour, uint32_t paramRef) {
     // Frequency dial for oscillators. Uses PitchType param to control display of Tune
     int pitchTypeParamIndex = 0;
     
     switch (module->type) {
+        case moduleTypeOscD:
         case moduleTypeOscMaster:
         {
             pitchTypeParamIndex = 3;
@@ -81,11 +100,12 @@ tRectangle render_paramType1OscFreq(tModule * module, tRectangle rectangle, char
             LOG_ERROR("paramType1OscFreq missing module->type implementation");
         }
     }
-    
+    LOG_ERROR("%u", pitchTypeParamIndex);
     switch (module->param[gVariation][pitchTypeParamIndex].value) {
         case 0:   // Semi. -64 to 63
         {
             double res;
+            LOG_ERROR("CASE 0\n");
             
             if (paramValue < 127) {
                 res = round((((double)paramValue - 64.0) * 10.0)) / 10.0;
@@ -100,6 +120,7 @@ tRectangle render_paramType1OscFreq(tModule * module, tRectangle rectangle, char
             double res;
             double min_freq = 8.1758;
             double max_freq = 12550.0;
+            LOG_ERROR("CASE 1\n");
             res = exp((double)paramValue / 127.0 * log(max_freq / min_freq)) * min_freq;
             
             if (res < 100) {
@@ -747,6 +768,33 @@ tRectangle render_paramType1Resonance(tModule * module, tRectangle rectangle, ch
     }
     return render_dial_with_text(moduleArea, rectangle, label, buff, paramValue, paramLocationList[paramRef].range, morphRange, colour);
 }
+    
+tRectangle render_paramType1SlaveTune(tModule * module, tRectangle rectangle, char* label, char* buff, double paramValue, uint32_t range, uint32_t morphRange, tRgb colour, uint32_t paramRef) {
+    // 0.50 to 50
+    int paramV = (int)paramValue;
+    const double resVals[] = {
+        1000.00, 1.01, 1.03, 1.04,  1.06, 1.07, 1.09, 1.11,  1.12, 1.14, 1.16, 1.17,  1.19, 1.21, 1.22, 1.24,
+        1.26, 1.28, 1.30, 1.32,  1.33, 1.35, 1.37, 1.39,  1.41, 1.43, 1.46, 1.48,  1.50, 1.52, 1.54, 1.56,
+        1.59, 1.61, 1.63, 1.66,  1.68, 1.71, 1.73, 1.76,  1.78, 1.81, 1.83, 1.86,  1.89, 1.92, 1.94, 1.97,
+        2.00, 2.03, 2.06, 2.09,  2.12, 2.15, 2.18, 2.21,  2.24, 2.28, 2.31, 2.34,  2.38, 2.41, 2.45, 2.48,
+        2.52, 2.56, 2.59, 2.63,  2.67, 2.71, 2.75, 2.79,  2.83, 2.87, 2.91, 2.95,  3.00, 3.04, 3.08, 3.13,
+        3.17, 3.22, 3.27, 3.32,  3.36, 3.41, 3.46, 3.51,  3.56, 3.62, 3.67, 3.72,  3.78, 3.83, 3.89, 3.94,
+        4.00, 4.06, 4.12, 4.18,  4.24, 4.30, 4.36, 4.43,  4.49, 4.56, 4.62, 4.69,  4.76, 4.83, 4.90, 4.97,
+        5.04, 5.11, 5.19, 5.26,  5.34, 5.42, 5.50, 5.58,  5.66, 5.74, 5.82, 5.91,  5.99, 6.08, 6.17, 6.26
+    };
+    double res = resVals[paramV];
+    if (paramValue == 0) {
+        snprintf(buff, sizeof(buff), "1:1");
+    } else if (paramValue == 48 ){
+        snprintf(buff, sizeof(buff), "2:1");
+    } else if (paramValue == 96 ){
+        snprintf(buff, sizeof(buff), "4:1");
+    } else {
+        snprintf(buff, sizeof(buff), "x%.2f", res);
+    }
+    return render_dial_with_text(moduleArea, rectangle, label, buff, paramValue, paramLocationList[paramRef].range, morphRange, colour);
+}
+
 
 tRectangle render_paramType1CommonDial(tModule * module, tRectangle rectangle, char* label, char* buff, double paramValue, uint32_t range, uint32_t morphRange, tRgb colour, uint32_t paramRef) {
     double res    = 0.0;

@@ -47,6 +47,7 @@ const char * gcStrMap[]               = {"GC", "GC", NULL};
 const char * kbStrMap[]               = {"KB", "KB", NULL};
 const char * sideChainStrMap[]        = {"Side Chain", "Side Chain", NULL};
 const char * pitchTypeStrMap[]        = {"Semi", "Freq", "Factor", "Partial", NULL};
+const char * algStrMap[]              = {"0.0", "0.8", "1.6", "2.3", "3.1", NULL};
 const char * fmTypeStrMap[]           = {"FM Lin", "FM Trk", NULL};
 const char * envShapeStrMap[]         = {"LogExp", "LinExp", "ExpExp", "LinLin", NULL};
 const char * normalResetStrMap[]      = {"Normal", "Reset", NULL};
@@ -654,6 +655,7 @@ const tParamLocation paramLocationList[] = {
     {moduleTypeEnvMulti,   paramType1StandardToggle, paramType2Toggle, {{-17, -29}, { 7,  7}}, anchorBottomRight, NULL,             6,   0, posStrMap,              NULL          }, // 52 OutType
     {moduleTypeEnvMulti,   paramType1StandardToggle, paramType2Toggle, {{ 10,  17}, { 7,  7}}, anchorTopLeft,     NULL,             2,   0, kbStrMap,               offOnColourMap}, // 52 Kbt
     {moduleTypeEnvMulti,   paramType1StandardToggle, paramType2Toggle, {{-26, -17}, { 7,  7}}, anchorBottomRight, NULL,             4,   0, envShapeStrMap,         NULL          }, // 52 Shape
+    {moduleTypeEnvMulti,   paramType1StandardToggle, paramType2Toggle, {{-26, -17}, { 7,  7}}, anchorBottomRight, NULL,             4,   0, envShapeStrMap,         NULL          }, // 52 Shape
     // 53 SandH -- No parameters
     // 54 FltStatic
     {moduleTypeFltStatic,  paramType1Freq,           paramType2Dial,   {{ 20,  -3}, { 7, 14}}, anchorBottomLeft,  "Freq",         128,   0, NULL,                   NULL          }, // 54 Freq
@@ -674,22 +676,22 @@ const tParamLocation paramLocationList[] = {
     {moduleTypeResonator,  paramType1CommonDial,     paramType2Dial,   {{ 62, -17}, { 7, 14}}, anchorBottomLeft,  "Damp",         128,   0, NULL,                   NULL          }, // 56 Damp
     {moduleTypeResonator,  paramType1Bypass,         paramType2Toggle, {{ -3,  -3}, { 5,  5}}, anchorMiddleRight, "Bypass",         2,   0, NULL,                   NULL          }, // 56 Bypass
     {moduleTypeResonator,  paramType1CommonDial,     paramType2Dial,   {{ 75, -17}, { 7, 14}}, anchorBottomLeft,  "Pos",          128,   0, NULL,                   NULL          }, // 56 Pos
-    {moduleTypeResonator,  paramType1StandardToggle, paramType2Toggle, {{ 30,  20}, { 7,  7}}, anchorTopLeft,     "Alg",            4,   0, pitchTypeStrMap,        NULL          }, // 56 Algorithm *** Check values
+    {moduleTypeResonator,  paramType1StandardToggle, paramType2Toggle, {{ 30,  20}, { 7,  7}}, anchorTopLeft,     "Alg",            5,   0, algStrMap,        NULL          }, // 56 Algorithm 
     // 57 Automate *** We lack an UI element for the CTRL selector
     // 58 Drumsynth
-    {moduleTypeDrumSynth,  paramType1FreqDrum,       paramType2Dial,   {{ 20, -22}, { 7, 14}}, anchorBottomLeft,  NULL,           128, 100, NULL,                   NULL          }, // 58 Master Freq
-    {moduleTypeDrumSynth,  paramType1CommonDial,     paramType2Dial,   {{ 20,  -3}, { 7, 14}}, anchorBottomLeft,  NULL,           128,   0, NULL,                   NULL          }, // 58 Slave Ratio
-    {moduleTypeDrumSynth,  paramType1ADRTime,        paramType2Dial,   {{ 30, -22}, { 7, 14}}, anchorBottomLeft,  "Dcy",          128,   0, NULL,                   NULL          }, // 58 MasterDecay
-    {moduleTypeDrumSynth,  paramType1ADRTime,        paramType2Dial,   {{ 30,  -3}, { 7, 14}}, anchorBottomLeft,  "Dcy",          128,   0, NULL,                   NULL          }, // 58 Slave Decay
-    {moduleTypeDrumSynth,  paramType1CommonDial,     paramType2Dial,   {{ 40, -22}, { 7, 14}}, anchorBottomLeft,  "Lvl",          128, 100, NULL,                   NULL          }, // 58 Master Level
-    {moduleTypeDrumSynth,  paramType1CommonDial,     paramType2Dial,   {{ 40,  -3}, { 7, 14}}, anchorBottomLeft,  "Lvl",          128, 100, NULL,                   NULL          }, // 58 Slave Level
-    {moduleTypeDrumSynth,  paramType1Freq,           paramType2Dial,   {{ 50, -22}, { 7, 14}}, anchorBottomLeft,  "Freq",         128,   0, NULL,                   NULL          }, // 58 Noise Filter Freq
-    {moduleTypeDrumSynth,  paramType1Resonance,      paramType2Dial,   {{ 60, -22}, { 7, 14}}, anchorBottomLeft,  "Res",          128,   0, NULL,                   NULL          }, // 54 Noise Filter Res
+    {moduleTypeDrumSynth,  paramType1FreqDrum,       paramType2Dial,   {{ 15, -30}, { 7, 14}}, anchorBottomLeft,  NULL,           128, 100, NULL,                   NULL          }, // 58 Master Freq
+    {moduleTypeDrumSynth,  paramType1SlaveTune,     paramType2Dial,   {{ 15,  -10}, { 7, 14}}, anchorBottomLeft,  NULL,           128,   0, NULL,                   NULL          }, // 58 Slave Ratio
+    {moduleTypeDrumSynth,  paramType1ADRTime,        paramType2Dial,   {{ 25, -22}, { 7, 14}}, anchorBottomLeft,  "Dcy",          128,   0, NULL,                   NULL          }, // 58 MasterDecay
+    {moduleTypeDrumSynth,  paramType1ADRTime,        paramType2Dial,   {{ 25,  -3}, { 7, 14}}, anchorBottomLeft,  "Dcy",          128,   0, NULL,                   NULL          }, // 58 Slave Decay
+    {moduleTypeDrumSynth,  paramType1CommonDial,     paramType2Dial,   {{ 35, -22}, { 7, 14}}, anchorBottomLeft,  "Lvl",          128, 100, NULL,                   NULL          }, // 58 Master Level
+    {moduleTypeDrumSynth,  paramType1CommonDial,     paramType2Dial,   {{ 35,  -3}, { 7, 14}}, anchorBottomLeft,  "Lvl",          128, 100, NULL,                   NULL          }, // 58 Slave Level
+    {moduleTypeDrumSynth,  paramType1DrumSynthNoiseFreq,           paramType2Dial,   {{ 50, -30}, { 7, 14}}, anchorBottomLeft,  "Freq",         128,   0, NULL,                   NULL          }, // 58 Noise Filter Freq
+    {moduleTypeDrumSynth,  paramType1CommonDial,      paramType2Dial,   {{ 60, -22}, { 7, 14}}, anchorBottomLeft,  "Res",          128,   0, NULL,                   NULL          }, // 54 Noise Filter Res
     {moduleTypeDrumSynth,  paramType1CommonDial,     paramType2Dial,   {{ 70, -22}, { 7, 14}}, anchorBottomLeft,  "Swp",          128,   0, NULL,                   NULL          }, // 58 Noise Filter Sweep
     {moduleTypeDrumSynth,  paramType1ADRTime,        paramType2Dial,   {{ 80, -22}, { 7, 14}}, anchorBottomLeft,  "Dcy",          128,   0, NULL,                   NULL          }, // 58 Noise Filter Decay
     {moduleTypeDrumSynth,  paramType1StandardToggle, paramType2Toggle, {{ 90, -22}, { 7,  7}}, anchorBottomLeft,  NULL,             3,   0, staticFilterTypeStrMap, NULL          }, // 58 Noise FilterType
-    {moduleTypeDrumSynth,  paramType1CommonDial,     paramType2Dial,   {{ 50,  -3}, { 7, 14}}, anchorBottomLeft,  "Bend",         128,   0, NULL,                   NULL          }, // 58 Bend Amount
-    {moduleTypeDrumSynth,  paramType1ADRTime,        paramType2Dial,   {{ 60,  -3}, { 7, 14}}, anchorBottomLeft,  "Dcy",          128,   0, NULL,                   NULL          }, // 58 BendDecay
+    {moduleTypeDrumSynth,  paramType1CommonDial,     paramType2Dial,   {{ 48,  -3}, { 7, 14}}, anchorBottomLeft,  "Bend",         128,   0, NULL,                   NULL          }, // 58 Bend Amount
+    {moduleTypeDrumSynth,  paramType1ADRTime,        paramType2Dial,   {{ 58,  -3}, { 7, 14}}, anchorBottomLeft,  "Dcy",          128,   0, NULL,                   NULL          }, // 58 BendDecay
     {moduleTypeDrumSynth,  paramType1CommonDial,     paramType2Dial,   {{ 70,  -3}, { 7, 14}}, anchorBottomLeft,  "Click",        128,   0, NULL,                   NULL          }, // 58 Click Amount
     {moduleTypeDrumSynth,  paramType1CommonDial,     paramType2Dial,   {{ 80,  -3}, { 7, 14}}, anchorBottomLeft,  "Noise",        128,   0, NULL,                   NULL          }, // 58 Noise Amount
     {moduleTypeDrumSynth,  paramType1Bypass,         paramType2Toggle, {{ -3, -10}, { 5,  5}}, anchorBottomRight, NULL,             2,   1, NULL,                   NULL          }, // 58 Bypass
@@ -807,12 +809,11 @@ const tParamLocation paramLocationList[] = {
     {moduleTypeStChorus,   paramType1Bypass,         paramType2Toggle, {{ -3,   0}, { 5,  5}}, anchorMiddleRight, NULL,             2,   1, NULL,                   NULL          },
     // 95 Unknown
     // 96 OscD
-    {moduleTypeOscD,       paramType1Freq,           paramType2Dial,   {{ 32,  -3}, { 7, 14}}, anchorBottomLeft,  "Tune",         128,  64, NULL,                   NULL          }, // 96 Tune
-    {moduleTypeOscD,       paramType1CommonDial,     paramType2Dial,   {{ 45,  -3}, { 7, 14}}, anchorBottomLeft,  "Cent",         128,  64, NULL,                   NULL          }, // 96 Fine
+    {moduleTypeOscD,       paramType1OscFreq,           paramType2Dial,   {{ 32,  -3}, { 7, 14}}, anchorBottomLeft,  "Tune",         128,  64, NULL,                   NULL          }, // 96 Tune
+    {moduleTypeOscD,       paramType1Fine,     paramType2Dial,   {{ 45,  -3}, { 7, 14}}, anchorBottomLeft,  "Cent",         128,  64, NULL,                   NULL          }, // 96 Fine
     {moduleTypeOscD,       paramType1StandardToggle, paramType2Toggle, {{ 22, -10}, { 7,  7}}, anchorBottomLeft,  "Kbt",            2,   1, offOnStrMap,            offOnColourMap}, // 96 Kbt
-    {moduleTypeOscD,       paramType1CommonDial,     paramType2Dial,   {{ 12,  -3}, { 7, 14}}, anchorBottomLeft,  "Pitch",        128,   0, NULL,                   NULL          }, // 96 Pitch M
+    {moduleTypeOscD,    paramType1StandardToggle, paramType2Toggle, {{ 12,  -3}, { 7,  7}}, anchorBottomLeft,     NULL,             4,   0, pitchTypeStrMap,        NULL          }, // 96 Pitch Type
     {moduleTypeOscD,       paramType1Bypass,         paramType2Toggle, {{-10,  -3}, { 5,  5}}, anchorBottomRight, "Bypass",         2,   0, NULL,                   NULL          }, // 96 Bypass
-
     // 97 OscA
     {moduleTypeOscA,       paramType1Freq,           paramType2Dial,   {{ 32,  -3}, { 7, 14}}, anchorBottomLeft,  "Tune",         128,  64, NULL,                   NULL          }, // 97 Tune
     {moduleTypeOscA,       paramType1CommonDial,     paramType2Dial,   {{ 45,  -3}, { 7, 14}}, anchorBottomLeft,  "Cent",         128,  64, NULL,                   NULL          }, // 97 Fine
@@ -1718,7 +1719,7 @@ const tConnectorLocation connectorLocationList[] = {
     {moduleTypeDrumSynth,   connectorDirIn,  connectorTypeLogic,   {{  3,   5}, {CONNECTOR_SIZE, CONNECTOR_SIZE}}, anchorTopLeft,     "Trig",         labelLocUp   }, // 55 Trig
     {moduleTypeDrumSynth,   connectorDirIn,  connectorTypeControl, {{  3, -17}, {CONNECTOR_SIZE, CONNECTOR_SIZE}}, anchorBottomLeft,  "Pitch",        labelLocUp   }, // 55 Pitch M
     {moduleTypeDrumSynth,   connectorDirIn,  connectorTypeControl, {{  3,  -3}, {CONNECTOR_SIZE, CONNECTOR_SIZE}}, anchorBottomLeft,  "Vel",          labelLocUp   }, // 55 Velocity
-    {moduleTypeDrumSynth,   connectorDirOut, connectorTypeControl, {{ -3,  -3}, {CONNECTOR_SIZE, CONNECTOR_SIZE}}, anchorBottomRight, NULL,           labelLocUp   }, // 55 Out
+    {moduleTypeDrumSynth,   connectorDirOut, connectorTypeAudio, {{ -3,  -3}, {CONNECTOR_SIZE, CONNECTOR_SIZE}}, anchorBottomRight, NULL,           labelLocUp   }, // 55 Out
     // 59 CompLev
     {moduleTypeCompLev,     connectorDirIn,  connectorTypeControl, {{ 40,  -3}, {CONNECTOR_SIZE, CONNECTOR_SIZE}}, anchorBottomLeft,  "A",            labelLocLeft }, // 55 Pitch M
     {moduleTypeCompLev,     connectorDirOut, connectorTypeLogic,   {{ -3,  -3}, {CONNECTOR_SIZE, CONNECTOR_SIZE}}, anchorBottomRight, "A>=C",         labelLocLeft }, // 55 Out

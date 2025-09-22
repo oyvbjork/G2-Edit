@@ -242,6 +242,11 @@ void render_param_common(tRectangle rectangle, tModule * module, uint32_t paramR
                     render_param_function = &render_paramType1Freq;
                     break;
                 }
+                case paramType1DrumSynthNoiseFreq:
+                {
+                    render_param_function = &render_paramType1DrumSynthNoiseFreq;
+                    break;
+                }
                 case paramType1OscFreq:
                 {
                     render_param_function = &render_paramType1OscFreq;
@@ -337,6 +342,12 @@ void render_param_common(tRectangle rectangle, tModule * module, uint32_t paramR
                     render_param_function = &render_paramType1Resonance;
                     break;
                 }
+                case paramType1SlaveTune:
+                {
+                    render_param_function = &render_paramType1SlaveTune;
+                    break;
+                }
+
                 case paramType1CommonDial: // Ultimately might not be a common dial, or could just be a default percent dial!?
                 case paramType1LRDial:     // Pan type dial, perhaps with reset triangle
                 default:

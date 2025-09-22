@@ -311,6 +311,7 @@ typedef enum {
 typedef enum {
     paramType1None,
     paramType1Freq,
+    paramType1DrumSynthNoiseFreq,
     paramType1OscFreq,
     paramType1Fine,
     paramType1GeneralFreq,
@@ -324,6 +325,7 @@ typedef enum {
     paramType1Time,
     paramType1TimeClk,
     paramType1Resonance,
+    paramType1SlaveTune,
     paramType1Pitch,
     paramType1Bypass,
     paramType1BipLevel,
