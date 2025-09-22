@@ -312,6 +312,7 @@ typedef enum {
     paramType1None,
     paramType1Freq,
     paramType1DrumSynthNoiseFreq,
+    paramType1ScratchPitchRatio,
     paramType1OscFreq,
     paramType1Fine,
     paramType1GeneralFreq,

@@ -75,8 +75,8 @@ const char * staticFilterTypeStrMap[] = {"LP", "BP", "HP", NULL};
 const char * multiEnvSustainStrMap[]  = {"L1", "L2", "L3", "Trg", NULL};
 const char * drSynthPresetStrMap[]    = {"Kick 1", "Kick 2", "Kick 3", "Kick 4", "Kick 5", "Snare 1", "Snare 2", "Snare 3", "Snare 4", "Snare 5", "Tom1 1", "Tom1 2", "Tom1 3", "Tom2 1", "Tom2 2", "Tom2 3", "Tom3 1", "Tom3 2", "Tom3 3", "Cymb 1", "Cymb 2", "Cymb 3", "Cymb 4", "Cymb 5", "Perc 1", "Perc 2", "Perc 3", "Perc 4", "Perc 5", "Perc 6", NULL}; // *** Don't have the list
 const char * asymSymStrMap[]          = {"Asym", "Sym", NULL};
-const char * odTypeStrMap[]           = {"Soft", "Hard", "Heavy", "Fat", NULL};
-const char * delayStrMap[]            = {"50ms", "?", "?", "?", NULL}; // *** For Scratch module; don't have the list
+const char * odTypeStrMap[]           = {"Soft", "Hard", "Fat", "Heavy", NULL};
+const char * delayStrMap[]            = {"12.5ms", "25ms", "50ms", "100ms", NULL}; // *** For Scratch module; don't have the list
 const char * gateTypeStrMap[]         = {"AND", "NAND", "OR", "NOR", "XOR", "NXOR", NULL};
 const char * invStrMap[]              = {"+", "Inv", NULL};
 const char * clkSrcStrMap[]           = {"Internal", "Master", NULL};
@@ -711,7 +711,7 @@ const tParamLocation paramLocationList[] = {
     {moduleTypeOverdrive,  paramType1StandardToggle, paramType2Toggle, {{ 15,  -3}, { 7,  7}}, anchorBottomLeft,  NULL,             4,   0, odTypeStrMap,           NULL          }, // 62 Type
     {moduleTypeOverdrive,  paramType1StandardToggle, paramType2Toggle, {{  3,  -3}, { 7,  7}}, anchorBottomLeft,  NULL,             2,   0, asymSymStrMap,          NULL          }, // 62 Shape
     // 63 Scratch
-    {moduleTypeScratch,    paramType1CommonDial,     paramType2Dial,   {{ 60,  -3}, { 7, 14}}, anchorBottomLeft,  NULL,           128,  64, NULL,                   NULL          }, // 63 Ratio
+    {moduleTypeScratch,    paramType1ScratchPitchRatio,     paramType2Dial,   {{ 60,  -3}, { 7, 14}}, anchorBottomLeft,  NULL,           128,  64, NULL,                   NULL          }, // 63 Ratio
     {moduleTypeScratch,    paramType1CommonDial,     paramType2Dial,   {{ 15,  -3}, { 7, 14}}, anchorBottomLeft,  NULL,           128,  64, NULL,                   NULL          }, // 63 Ratio Mod
     {moduleTypeScratch,    paramType1StandardToggle, paramType2Toggle, {{ 75,  -3}, { 7,  7}}, anchorBottomLeft,  NULL,             4,   0, delayStrMap,            NULL          }, // 63 Delay
     {moduleTypeScratch,    paramType1Bypass,         paramType2Toggle, {{ -3, -10}, { 5,  5}}, anchorBottomRight, NULL,             2,   1, NULL,                   NULL          }, // 63 Bypass

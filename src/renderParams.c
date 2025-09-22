@@ -78,6 +78,21 @@ tRectangle render_paramType1DrumSynthNoiseFreq(tModule * module, tRectangle rect
 }
 
     
+tRectangle render_paramType1ScratchPitchRatio(tModule * module, tRectangle rectangle, char* label, char* buff, double paramValue, uint32_t range, uint32_t morphRange, tRgb colour, uint32_t paramRef) {
+    // -x4.00 to x4.00, linear
+    double value = 0.0;
+    
+    value = (paramValue - 64.0)/16.0;
+
+    if (paramValue == 127) {
+        snprintf(buff, sizeof(buff), "x4.00");
+    } else {
+        snprintf(buff, sizeof(buff), "x%.2f", value);
+    }
+    return render_dial_with_text(moduleArea, rectangle, label, buff, paramValue, paramLocationList[paramRef].range, morphRange, colour);
+}
+
+    
 tRectangle render_paramType1OscFreq(tModule * module, tRectangle rectangle, char* label, char* buff, double paramValue, uint32_t range, uint32_t morphRange, tRgb colour, uint32_t paramRef) {
     // Frequency dial for oscillators. Uses PitchType param to control display of Tune
     int pitchTypeParamIndex = 0;

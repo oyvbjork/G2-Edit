@@ -252,6 +252,11 @@ void render_param_common(tRectangle rectangle, tModule * module, uint32_t paramR
                     render_param_function = &render_paramType1OscFreq;
                     break;
                 }
+                case paramType1ScratchPitchRatio:
+                {
+                    render_param_function = &render_paramType1ScratchPitchRatio;
+                    break;
+                }
                 case paramType1Fine:
                 {
                     render_param_function = &render_paramType1Fine;
