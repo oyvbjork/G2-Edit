@@ -28,6 +28,9 @@ extern "C" {
 
 void init_patch(uint32_t slot);
 void get_global_gui_scaled_mouse_coord(tCoord * coord);
+void start_cursor_drag(void);
+void stop_dragging(void);
+void stop_synth_name_editing(void);
 bool handle_scrollbar_click(tCoord coord);
 void set_x_scroll_bar(double x);
 void set_y_scroll_bar(double y);
