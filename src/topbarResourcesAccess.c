@@ -38,7 +38,7 @@ void topbar_init_controls(void) {
     }
 
     gTopbarControls[topbarPatchVolumeId].rectangle = (tRectangle){{
-                                                                      320.0, 56.0
+                                                                      320.0, 56.0 + MENU_BAR_HEIGHT
                                                                   }, {
                                                                       20.0, 20.0
                                                                   }
